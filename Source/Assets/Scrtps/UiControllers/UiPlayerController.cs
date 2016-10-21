@@ -9,9 +9,9 @@ public class UiPlayerController : MonoBehaviour
 {
     #region Variables
     public Image fillHealth;
-    public int maxHp;
+    public float maxHp;
     public Image fillO2;
-    public int maxO2;
+    public float maxO2;
     public float amountHpChange;
     bool change;
     public float amountO2Change;
@@ -21,27 +21,31 @@ public class UiPlayerController : MonoBehaviour
     public void ResetFills(float maxHp, float maxO2)
     {
         this.fillHealth.fillAmount = 1;
+        this.maxHp = maxHp;
+
         this.fillO2.fillAmount = 1;
-        this.amountHpChange = 1;
-        this.amountO2Change = 1;
+        this.maxO2 = maxO2;
 
     }
 
     public void ReduceHpAmount(float amount)
     {
-        if (fillHealth && maxHp > 0)
-        {
-            this.amountHpChange = fillHealth.fillAmount - (amount / this.maxHp);
+        this.amountO2Change = fillO2.fillAmount - (amount / this.maxO2);
+        //if (fillHealth && maxHp > 0)
+        //{
+        //    this.amountHpChange = fillHealth.fillAmount - (amount / this.maxHp);
 
-        }
+        //}
     }
 
     public void ReduceO2Amount(float amount)
     {
-        if (fillHealth && maxHp > 0)
-        {
-            this.amountO2Change = fillO2.fillAmount - (amount / this.maxO2);
-        }
+        this.amountO2Change = fillO2.fillAmount - (amount / this.maxO2);
+
+        //if (fillHealth && maxHp > 0)
+        //{
+        //    this.amountO2Change = fillO2.fillAmount - (amount / this.maxO2);
+        //}
     }
     void Update()
     {
