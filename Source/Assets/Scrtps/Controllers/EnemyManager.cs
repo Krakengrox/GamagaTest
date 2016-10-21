@@ -1,13 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Associated all enemy GameObject in the level with an instance of one enemy class
+/// </summary>
 public class EnemyManager
 {
-
+    #region Variables
+    /// <summary>
+    /// Enemy List in the level
+    /// </summary>
     List<Transform> enemies = null;
-    Enemy enemy = null;
-    EnemyData enemyData;
 
+    /// <summary>
+    /// Enemy instance
+    /// </summary>
+    Enemy enemy = null;
+
+    /// <summary>
+    /// Enemy Data
+    /// </summary>
+    EnemyData enemyData;
+    #endregion
+
+    #region Methods
+    /// <summary>
+    /// constructor
+    /// </summary>
+    /// <param name="enemies">list of enemy</param>
+    /// <param name="enemyData"></param>
     public EnemyManager(List<Transform> enemies, EnemyData enemyData)
     {
         this.enemies = enemies;
@@ -15,6 +36,9 @@ public class EnemyManager
         CreatedEnemies();
     }
 
+    /// <summary>
+    /// Create all Enemy
+    /// </summary>
     void CreatedEnemies()
     {
         for (int i = 0; i < enemies.Count; i++)
@@ -30,7 +54,7 @@ public class EnemyManager
 
         }
     }
-
+    #endregion
 }
 
 

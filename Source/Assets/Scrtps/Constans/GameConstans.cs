@@ -1,11 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameConstans
+/// <summary>
+/// Constants for all game, it help to recet data
+/// </summary>
+public static class GameConstans
 {
+    #region Variables
+    public static int playerHealt = 100;
+    public static int playerSpeed = 3;
+    public static int playerItemCount = 0;
+
+    public static int enemySpeed = 3;
+    public static int enemyHitDamage = 50;
+    public static int enemyBulletsDamage = 50;
+
+    public static int valueItem = 1;
+
+    public static int rankings = 0;
+
+    public static float timeUpProgresiveBar = 0.15f;
+    #endregion
 
 }
 
+/// <summary>
+/// Defined the element type of the element.
+/// </summary>
 public enum ELEMENTTYPE
 {
     NONE,
@@ -15,6 +36,9 @@ public enum ELEMENTTYPE
     ENEMY
 }
 
+/// <summary>
+/// Defined the alliance of the element.
+/// </summary>
 public enum ENEMYTYPE
 {
     NONE,
@@ -23,6 +47,9 @@ public enum ENEMYTYPE
     MELEE,
 }
 
+/// <summary>
+/// List of Stats for element
+/// </summary>
 public enum ELEMENTSTATS
 {
     NONE,
@@ -32,6 +59,9 @@ public enum ELEMENTSTATS
     ITEMSCOUNT,
 }
 
+/// <summary>
+/// Status for the element
+/// </summary>
 public enum ElementStatus
 {
     NONE,

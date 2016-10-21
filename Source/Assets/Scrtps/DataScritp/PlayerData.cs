@@ -11,5 +11,6 @@ public class PlayerData : ScriptableObject
     public int maxPlayerHealt = 0;
     public int playerSpeed = 0;
     public int playerItemCount = 0;
+    public int player02 = 0;    
 
 }

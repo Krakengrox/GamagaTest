@@ -2,9 +2,12 @@
 using System.Collections;
 using System;
 
+/// <summary>
+/// class that creates an Item based on an GameElement within the game
+/// </summary>
 public class Player : GameElement
 {
-
+    #region Variables
     public PlayerData playerData { get; set; }
 
     public override Rigidbody rb { get; protected set; }
@@ -17,24 +20,35 @@ public class Player : GameElement
 
     public override ElementStatus status { get; set; }
 
+    public Action IamDead;
+
+    public Action<float> HitMe;
+
     AutomaticMove movementController = null;
     Tap tapCanvas = null;
+    #endregion
 
-    public Player(PlayerData playerData, GameObject prefab, Tap tapCanvas)
+    #region Methods
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="itemData"></param>
+    public Player(PlayerData playerData, GameObject prefab)
     {
-        this.playerData = playerData;   
+        this.playerData = playerData;
         this.elementObject = prefab;
-        this.tapCanvas = tapCanvas;
         this.playerData.currentPlayerHealt = this.playerData.maxPlayerHealt;
         InitComponent();
     }
 
     void InitComponent()
     {
+        this.playerData.playerItemCount = 0;
         this.elementObject.AddComponent<GEComponent>().gameElement = this;
         this.detector = this.elementObject.AddComponent<Detector>();
         this.rb = this.elementObject.GetComponent<Rigidbody>();
-        this.movementController = new AutomaticMove(this, tapCanvas);
+        this.movementController = new AutomaticMove(this);
     }
 
     public override void ChangeStats(ELEMENTSTATS statistics, int value)
@@ -43,10 +57,12 @@ public class Player : GameElement
         {
             case ELEMENTSTATS.HEAL:
                 playerData.currentPlayerHealt -= value;
+                HitMe(value);
                 if (playerData.currentPlayerHealt <= 0)
                 {
                     playerData.currentPlayerHealt = 0;
                     this.status = ElementStatus.DEAD;
+                    IamDead();
                 }
                 break;
             case ELEMENTSTATS.SPEED:
@@ -59,4 +75,5 @@ public class Player : GameElement
                 break;
         }
     }
+    #endregion
 }

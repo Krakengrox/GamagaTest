@@ -1,23 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+
+/// <summary>
+/// Automatic detector element enter in a collider
+/// </summary>
 public class Detector : MonoBehaviour
 {
-    public Action<GameElement, bool> actionCollision = null;
-    public Action getItem = null;
-    public GameElement target = null;
-    GameElement myGameElement;
-    public bool enter = false;
-    public bool stay = false;
+    #region Variables
 
+    /// <summary>
+    /// Callback for a collision action
+    /// </summary>
+    public Action<GameElement, bool> actionCollision = null;
+    /// <summary>
+    /// GameObject target
+    /// </summary>
+    public GameElement target = null;
+    /// <summary>
+    /// Me abstract class in me game object
+    /// </summary>
+    GameElement myGameElement;
+
+    /// <summary>
+    /// if i enter in a collision event
+    /// </summary>
+    public bool enter = false;
+
+    /// <summary>
+    /// time to wait for callback action
+    /// </summary>
     float timeToWait = 2;
     float time = 3;
+    #endregion
 
+    #region Methods
     void Awake()
     {
         this.myGameElement = this.GetComponent<GEComponent>().gameElement;
     }
 
+    /// <summary>
+    /// Ontrigger event, activated if a game object enter, validate type target and action
+    /// </summary>
+    /// <param name="incommingObject"></param>
     void OnTriggerEnter(Collider incommingObject)
     {
 
@@ -30,13 +56,16 @@ public class Detector : MonoBehaviour
             {
                 StartCoroutine(Timer());
             }
-            else if (this.myGameElement.elemetSide != ELEMENTTYPE.ENEMY)
+            else if (this.myGameElement.elemetSide == ELEMENTTYPE.ITEM && this.myGameElement.elemetSide != ELEMENTTYPE.ENEMY)
             {
                 actionCollision(target, enter);
             }
         }
     }
-
+    /// <summary>
+    /// Ontrigger event, activated if a game object out, validate type target and action
+    /// </summary>
+    /// <param name="incommingObject"></param>
     void OnTriggerExit(Collider incommingObject)
     {
 
@@ -44,14 +73,6 @@ public class Detector : MonoBehaviour
         {
             this.target = incommingObject.GetComponent<GEComponent>().gameElement;
             this.enter = false;
-            if (this.myGameElement.elemetSide == ELEMENTTYPE.ENEMY && this.myGameElement.elemetSide != target.elemetSide)
-            {
-                actionCollision(target, enter);
-            }
-            else if (this.myGameElement.elemetSide != ELEMENTTYPE.ENEMY)
-            {
-                actionCollision(target, enter);
-            }
 
         }
         else if (this.myGameElement.elemetSide == ELEMENTTYPE.ALLY)
@@ -60,6 +81,10 @@ public class Detector : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine for a launch action in elapsed time
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Timer()
     {
         while (enter)
@@ -76,4 +101,5 @@ public class Detector : MonoBehaviour
         yield return 0;
 
     }
+    #endregion
 }

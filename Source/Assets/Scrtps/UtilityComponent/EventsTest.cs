@@ -3,13 +3,18 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System;
 
+/// <summary>
+/// Component that capture events onpointer and return callback
+/// </summary>
 public class EventsTest : MonoBehaviour, IPointerDownHandler, IPointerClickHandler
 {
-
+    #region Variables
     public bool down;
     public Action<bool, string> changeState;
     public String side;
+    #endregion
 
+    #region Methods
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("prescion down");
@@ -23,6 +28,6 @@ public class EventsTest : MonoBehaviour, IPointerDownHandler, IPointerClickHandl
         down = false;
         changeState(down, side);
     }
-
+    #endregion
 
 }

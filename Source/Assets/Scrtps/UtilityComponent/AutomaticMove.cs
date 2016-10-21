@@ -1,28 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Use for a player Move whith Keyboard and automatic mechanic in "X". 
+/// </summary>
 public class AutomaticMove
 {
-
+    #region Variable
+    /// <summary>
+    /// Movement vector value for translate object
+    /// </summary>
     Vector3 movement;
+    /// <summary>
+    /// Force aplicate in automatic move
+    /// </summary>
     float h = 0.5f;
+    /// <summary>
+    /// Speed object move
+    /// </summary>
     float speed = 2.0f;
+    /// <summary>
+    /// Element move
+    /// </summary>
     GameElement gameElement = null;
+    /// <summary>
+    /// power for jump
+    /// </summary>
     float power = 5;
-
+    /// <summary>
+    /// active atomatic move
+    /// </summary>
     bool automatic = false;
-    public float maxSpeed = 10f;
-    public float forceMagnitude = 2f;
+    #endregion
 
-    public AutomaticMove(GameElement gameElement, Tap tapCanvas)
+    #region Methods
+    /// <summary>
+    /// Construct, add event component update
+    /// </summary>
+    /// <param name="gameElement"></param>
+    /// <param name="tapCanvas"></param>
+    public AutomaticMove(GameElement gameElement)
     {
         this.gameElement = gameElement;
-#if UNITY_STANDALONE_WIN
         this.gameElement.elementObject.GetComponent<GEComponent>().updateEvent += Move;
         this.gameElement.elementObject.GetComponent<GEComponent>().updateEvent += Jump;
-#endif
     }
 
+    /// <summary>
+    /// translate element
+    /// </summary>
     void Move()
     {
         if (automatic)
@@ -39,6 +65,9 @@ public class AutomaticMove
 
     }
 
+    /// <summary>
+    /// apply velocity for impulse object in Y
+    /// </summary>
     void Jump()
     {
         if (Input.GetButtonDown("Jump"))
@@ -46,4 +75,5 @@ public class AutomaticMove
             this.gameElement.rb.velocity = new Vector3(this.gameElement.rb.velocity.x, power, this.gameElement.rb.velocity.z);
         }
     }
+    #endregion
 }

@@ -2,17 +2,22 @@
 using System.Collections;
 using System;
 
+/// <summary>
+/// component that identifies an object as a Game Element
+/// </summary>
 public class GEComponent : MonoBehaviour
 {
+    #region Variables
     public GameElement gameElement = null;
-    public Action fixeUpdateEvent;
+    public Action fixedUpdateEvent;
     public Action updateEvent;
+    #endregion
 
-
+    #region Variables
     void FixedUpdate()
     {
-        if (fixeUpdateEvent != null)
-            fixeUpdateEvent();
+        if (fixedUpdateEvent != null)
+            fixedUpdateEvent();
 
     }
 
@@ -21,4 +26,5 @@ public class GEComponent : MonoBehaviour
         if (updateEvent != null)
             updateEvent();
     }
+    #endregion
 }

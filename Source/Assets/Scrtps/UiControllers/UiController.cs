@@ -2,53 +2,62 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Control all UI in the game
+/// </summary>
 public class UiController : MonoBehaviour
 {
+    #region Variables
+    public UiInitMenu uiInitMenu;
 
-    [SerializeField]
-    Button startBtn, resetBtn, backInitBtm = null;
+    public UiFinalMenu uiFinalMenu;
+
+    public UiPlayerController uiPlayerController;
 
     [SerializeField]
     GameObject menuInit, resetMenu = null;
 
-    public Action startGame = null;
-    public Action finalGame = null;
+    public Action<int> startGame = null;
+    #endregion
 
+    #region Methods
     void Start()
     {
-        startBtn.onClick.AddListener(StartEvent);
-        resetBtn.onClick.AddListener(RestartEvent);
-        backInitBtm.onClick.AddListener(BackInit);
+        this.uiInitMenu.starGameBtn.onClick.AddListener(StartGameEvent);
+        this.uiFinalMenu.restartButton.onClick.AddListener(RestartEvent);
         InitCanvas();
     }
 
     void InitCanvas()
     {
-        menuInit.SetActive(true);
+        this.uiInitMenu.gameObject.SetActive(true);
         resetMenu.SetActive(false);
     }
 
-
-    void StartEvent() 
+    public void FinalGame()
     {
-        //startGame();
+        resetMenu.SetActive(true);
+    }
+
+    void StartGameEvent()
+    {
         menuInit.SetActive(false);
         resetMenu.SetActive(false);
+        startGame(1);
     }
-    
+
+    void ReduceBarHealt(int value)
+    {
+        this.uiPlayerController.ReduceHpAmount(value);
+    }
+
     void RestartEvent()
     {
-        //finalGame();
-        menuInit.SetActive(false);
-        resetMenu.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
-    void BackInit()
-    {
-        menuInit.SetActive(true);
-        resetMenu.SetActive(false);
-    }
-
+    #endregion
 
 }
