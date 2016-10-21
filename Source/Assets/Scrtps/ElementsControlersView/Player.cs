@@ -24,8 +24,9 @@ public class Player : GameElement
 
     public Action<float> HitMe;
 
+    public Action<int> RefreshGuears;
+
     AutomaticMove movementController = null;
-    Tap tapCanvas = null;
     #endregion
 
     #region Methods
@@ -48,7 +49,7 @@ public class Player : GameElement
         this.elementObject.AddComponent<GEComponent>().gameElement = this;
         this.detector = this.elementObject.AddComponent<Detector>();
         this.rb = this.elementObject.GetComponent<Rigidbody>();
-        this.movementController = new AutomaticMove(this);
+        this.movementController = new AutomaticMove(this, this.playerData.playerSpeed);
     }
 
     public override void ChangeStats(ELEMENTSTATS statistics, int value)
@@ -70,6 +71,7 @@ public class Player : GameElement
                 break;
             case ELEMENTSTATS.ITEMSCOUNT:
                 playerData.playerItemCount += value;
+                RefreshGuears(this.playerData.playerItemCount);
                 break;
             default:
                 break;

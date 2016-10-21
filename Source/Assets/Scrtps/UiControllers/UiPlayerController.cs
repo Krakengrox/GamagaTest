@@ -13,8 +13,8 @@ public class UiPlayerController : MonoBehaviour
     public Image fillO2;
     public float maxO2;
     public float amountHpChange;
-    bool change;
     public float amountO2Change;
+    public Text amountGuears;
     #endregion
 
     #region Methods
@@ -30,7 +30,9 @@ public class UiPlayerController : MonoBehaviour
 
     public void ReduceHpAmount(float amount)
     {
-        this.amountO2Change = fillO2.fillAmount - (amount / this.maxO2);
+
+        this.fillHealth.fillAmount -= (amount / this.maxHp);
+        Debug.Log("amount " + amount + "fill" + fillHealth.fillAmount);
         //if (fillHealth && maxHp > 0)
         //{
         //    this.amountHpChange = fillHealth.fillAmount - (amount / this.maxHp);
@@ -40,7 +42,7 @@ public class UiPlayerController : MonoBehaviour
 
     public void ReduceO2Amount(float amount)
     {
-        this.amountO2Change = fillO2.fillAmount - (amount / this.maxO2);
+        this.fillO2.fillAmount -= (amount / this.maxO2);
 
         //if (fillHealth && maxHp > 0)
         //{

@@ -28,7 +28,7 @@ public class GameInitializer : MonoBehaviour
     /// List of all Levels
     /// </summary>
     public GameObject[] levels;
-    
+
     /// <summary>
     /// Enemy Manager instance
     /// </summary>
@@ -38,6 +38,10 @@ public class GameInitializer : MonoBehaviour
     /// Item Manager Instance
     /// </summary>
     ItemManager itemManager;
+    /// <summary>
+    /// Game Time Manager (02 control)
+    /// </summary>
+    public GameTime gameTime = null;
 
     /// <summary>
     /// UI Game objects 
@@ -61,9 +65,13 @@ public class GameInitializer : MonoBehaviour
         player.IamDead += GameOver;
         Pause(0);
         uiController.startGame += Pause;
+        uiController.startTime += InitTime;
         this.finalEvent.gameOver += GameOver;
         InitMenuBars();
         player.HitMe += uiController.uiPlayerController.ReduceHpAmount;
+        player.detector.actionColli += GameOver;
+        player.RefreshGuears += uiController.RefreshGuears;
+
     }
 
     /// <summary>
@@ -83,7 +91,7 @@ public class GameInitializer : MonoBehaviour
         }
 
     }
-    
+
     /// <summary>
     /// Control final game and pause when finish
     /// </summary>
@@ -111,5 +119,14 @@ public class GameInitializer : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
+
+    void InitTime()
+    {
+        this.gameTime.refreshClock += uiController.uiPlayerController.ReduceO2Amount;
+        this.gameTime.timerInGame = this.modelController.playerData.player02;
+        this.gameTime.finshTime += GameOver;
+        this.gameTime.gameObject.SetActive(true);
+
+    }
     #endregion
 }

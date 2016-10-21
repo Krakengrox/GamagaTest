@@ -12,8 +12,6 @@ public class UiRanking : MonoBehaviour
     public GameObject rankingTablet;
     public Button exitButton;
     public Text first;
-    public Text seccond;
-    public Text third;
     #endregion
 
     #region Methods
@@ -25,10 +23,7 @@ public class UiRanking : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("eneabled");
         this.first.text = this.rankingData.firstPosition.ToString();
-        this.seccond.text = this.rankingData.seccondPosition.ToString();
-        this.third.text = this.rankingData.thirdPosition.ToString();
     }
 
     void ExitAction()

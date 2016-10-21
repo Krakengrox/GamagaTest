@@ -39,11 +39,12 @@ public class AutomaticMove
     /// </summary>
     /// <param name="gameElement"></param>
     /// <param name="tapCanvas"></param>
-    public AutomaticMove(GameElement gameElement)
+    public AutomaticMove(GameElement gameElement, int speed)
     {
         this.gameElement = gameElement;
         this.gameElement.elementObject.GetComponent<GEComponent>().updateEvent += Move;
         this.gameElement.elementObject.GetComponent<GEComponent>().updateEvent += Jump;
+        this.speed = speed;
     }
 
     /// <summary>

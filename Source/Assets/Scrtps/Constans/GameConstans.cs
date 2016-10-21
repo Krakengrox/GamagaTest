@@ -8,10 +8,10 @@ public static class GameConstans
 {
     #region Variables
     public static int playerHealt = 100;
-    public static int playerSpeed = 3;
+    public static int playerSpeed = 2;
     public static int playerItemCount = 0;
 
-    public static int enemySpeed = 3;
+    public static int enemySpeed = 2;
     public static int enemyHitDamage = 50;
     public static int enemyBulletsDamage = 50;
 

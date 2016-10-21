@@ -9,30 +9,28 @@ using System;
 public class GameTime : MonoBehaviour
 {
     #region variables
-    int timerInGame = 0;
-    int timeDuration = 30;
-    Action endGame;
-    bool gamePause;
-    bool initGame;
-
+    public int timerInGame = 30;
+    int elapseTime = 1;
+    public Action<float> refreshClock;
+    public Action finshTime;
     public Text clockText;
     #endregion
 
     #region Method
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(TimerTest());
-
     }
 
     IEnumerator TimerTest()
     {
-        while (timerInGame <= timeDuration && !gamePause)
+        while (timerInGame >= 0)
         {
-            timerInGame += 1;
-            //clockText.text = timerInGame.ToString();
+            timerInGame -= elapseTime;
+            refreshClock(elapseTime);
             yield return new WaitForSeconds(1);
         }
+        finshTime();
 
     }
     #endregion

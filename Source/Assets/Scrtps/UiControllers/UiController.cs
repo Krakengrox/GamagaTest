@@ -20,6 +20,7 @@ public class UiController : MonoBehaviour
     GameObject menuInit, resetMenu = null;
 
     public Action<int> startGame = null;
+    public Action startTime = null;
     #endregion
 
     #region Methods
@@ -46,11 +47,18 @@ public class UiController : MonoBehaviour
         menuInit.SetActive(false);
         resetMenu.SetActive(false);
         startGame(1);
+        startTime();
     }
 
     void ReduceBarHealt(int value)
     {
         this.uiPlayerController.ReduceHpAmount(value);
+    }
+
+    public void RefreshGuears(int value)
+    {
+        this.uiPlayerController.amountGuears.text = value.ToString();
+
     }
 
     void RestartEvent()

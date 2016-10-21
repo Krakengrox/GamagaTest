@@ -14,6 +14,10 @@ public class Detector : MonoBehaviour
     /// </summary>
     public Action<GameElement, bool> actionCollision = null;
     /// <summary>
+    /// Callback for a collision action
+    /// </summary>
+    public Action actionColli = null;
+    /// <summary>
     /// GameObject target
     /// </summary>
     public GameElement target = null;
@@ -60,6 +64,15 @@ public class Detector : MonoBehaviour
             {
                 actionCollision(target, enter);
             }
+            else if (this.myGameElement.elemetSide == ELEMENTTYPE.ALLY && target.elemetSide != ELEMENTTYPE.ITEM && target.elemetSide != ELEMENTTYPE.ENEMY)
+            {
+
+
+            }
+        }
+        else if (this.myGameElement.elemetSide == ELEMENTTYPE.ALLY)
+        {
+            actionColli();
         }
     }
     /// <summary>
