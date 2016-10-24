@@ -24,6 +24,27 @@ public class LevelLoad
     /// List of Items
     /// </summary>
     public List<Transform> items;
+
+    /// <summary>
+    /// Model Controller
+    /// </summary>
+    ModelController modelController = null;
+
+    /// <summary>
+    /// Enemy Manager instance
+    /// </summary>
+    EnemyManager enemyManager;
+
+    /// <summary>
+    /// Item Manager Instance
+    /// </summary>
+    ItemManager itemManager;
+
+    /// <summary>
+    /// Obstacles Manager Instance
+    /// </summary>
+    ObstaclesManager obstaclesManager;
+
     #endregion
 
     #region Methods
@@ -31,20 +52,29 @@ public class LevelLoad
     /// Constructor
     /// </summary>
     /// <param name="levelGo"></param>
-    public LevelLoad(GameObject levelGo)
+    public LevelLoad(GameObject levelGo, ModelController modelController)
     {
         this.levelGo = levelGo;
-        InitLoad();
+        this.modelController = modelController;
+        InitElementsList();
+        WakeElements();
     }
 
     /// <summary>
     /// Init List
     /// </summary>
-    public void InitLoad()
+    public void InitElementsList()
     {
         this.enemies = new List<Transform>();
         this.obstacles = new List<Transform>();
         this.items = new List<Transform>();
+    }
+
+    public void WakeElements()
+    {
+        this.enemyManager = new EnemyManager(FindEnemies(), this.modelController.enemyData);
+        this.itemManager = new ItemManager(FindItems(), this.modelController.itemData);
+        this.obstaclesManager = new ObstaclesManager(FindObstacles(), this.modelController.obstacleData);
     }
 
     /// <summary>
@@ -57,7 +87,6 @@ public class LevelLoad
         foreach (Transform enemy in ts)
         {
             this.enemies.Add(enemy);
-            Debug.Log(enemy.name);
         }
         return this.enemies;
     }
@@ -72,7 +101,6 @@ public class LevelLoad
         foreach (Transform obstacle in ts)
         {
             this.obstacles.Add(obstacle);
-            Debug.Log(obstacle.name);
         }
         return this.obstacles;
     }
@@ -87,7 +115,6 @@ public class LevelLoad
         foreach (Transform item in ts)
         {
             this.items.Add(item);
-            Debug.Log(item.name);
         }
         return this.items;
     }
@@ -111,6 +138,5 @@ public class LevelLoad
         Transform ts = this.levelGo.transform.FindChild("Items");
         return ts;
     }
-
     #endregion
 }

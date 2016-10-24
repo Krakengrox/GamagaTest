@@ -8,6 +8,7 @@ public class ModelController : MonoBehaviour
     public EnemyData enemyData;
     public ItemData itemData;
     public RankingData rankingData;
+    public ObstacleData obstacleData;
 
     public void ResetAllData()
     {
@@ -24,6 +25,8 @@ public class ModelController : MonoBehaviour
         this.rankingData.firstPosition = GameConstans.rankings;
         this.rankingData.seccondPosition = GameConstans.rankings;
         this.rankingData.thirdPosition = GameConstans.rankings;
+
+        this.obstacleData.damage = GameConstans.obstacleDamage;
 
 
     }

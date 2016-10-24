@@ -28,16 +28,6 @@ public class GameInitializer : MonoBehaviour
     /// List of all Levels
     /// </summary>
     public GameObject[] levels;
-
-    /// <summary>
-    /// Enemy Manager instance
-    /// </summary>
-    EnemyManager enemyManager;
-
-    /// <summary>
-    /// Item Manager Instance
-    /// </summary>
-    ItemManager itemManager;
     /// <summary>
     /// Game Time Manager (02 control)
     /// </summary>
@@ -57,10 +47,8 @@ public class GameInitializer : MonoBehaviour
     #region Methods
     void Start()
     {
-        this.levelLoad = new LevelLoad(this.levels[0]);
-        this.levelLoad.InitLoad();
-        this.enemyManager = new EnemyManager(levelLoad.FindEnemies(), this.modelController.enemyData);
-        this.itemManager = new ItemManager(levelLoad.FindItems(), this.modelController.itemData);
+        this.levelLoad = new LevelLoad(this.levels[0], this.modelController);
+        this.levelLoad.InitElementsList();
         player = new Player(this.modelController.playerData, GameObject.Find("Charat"));
         player.IamDead += GameOver;
         Pause(0);

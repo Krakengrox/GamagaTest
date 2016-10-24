@@ -32,7 +32,6 @@ public class UiPlayerController : MonoBehaviour
     {
 
         this.fillHealth.fillAmount -= (amount / this.maxHp);
-        Debug.Log("amount " + amount + "fill" + fillHealth.fillAmount);
         //if (fillHealth && maxHp > 0)
         //{
         //    this.amountHpChange = fillHealth.fillAmount - (amount / this.maxHp);

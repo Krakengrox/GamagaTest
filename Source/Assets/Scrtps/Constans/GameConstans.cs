@@ -20,6 +20,8 @@ public static class GameConstans
     public static int rankings = 0;
 
     public static float timeUpProgresiveBar = 0.15f;
+
+    public static int obstacleDamage = 50;
     #endregion
 
 }
