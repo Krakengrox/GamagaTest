@@ -75,7 +75,7 @@ public class AutomaticMove
     /// </summary>
     void Jump()
     {
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             this.gameElement.rb.velocity = new Vector3(this.gameElement.rb.velocity.x, power, this.gameElement.rb.velocity.z);
             //this.jet.GetComponent<ParticleSystem>().Play();
