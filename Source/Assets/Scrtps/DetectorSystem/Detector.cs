@@ -56,7 +56,7 @@ public class Detector : MonoBehaviour
         {
             this.target = incommingObject.GetComponent<GEComponent>().gameElement;
 
-            if (this.myGameElement.elemetSide == ELEMENTTYPE.ENEMY && this.myGameElement.elemetSide != target.elemetSide)
+            if (this.myGameElement.elemetSide == ELEMENTTYPE.ENEMY && ELEMENTTYPE.ALLY == target.elemetSide)
             {
                 StartCoroutine(Timer());
             }

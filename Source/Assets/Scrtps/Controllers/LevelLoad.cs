@@ -87,7 +87,7 @@ public class LevelLoad
         foreach (Transform enemy in ts)
         {
             this.enemies.Add(enemy);
-        }
+        }   
         return this.enemies;
     }
 

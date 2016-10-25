@@ -31,6 +31,9 @@ public class AutomaticMove
     /// active atomatic move
     /// </summary>
     bool automatic = false;
+
+
+    GameObject jet = null;
     #endregion
 
     #region Methods
@@ -44,6 +47,7 @@ public class AutomaticMove
         this.gameElement = gameElement;
         this.gameElement.elementObject.GetComponent<GEComponent>().updateEvent += Move;
         this.gameElement.elementObject.GetComponent<GEComponent>().updateEvent += Jump;
+        this.jet = GameObject.Find("Jet");
         this.speed = speed;
     }
 
@@ -71,9 +75,14 @@ public class AutomaticMove
     /// </summary>
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             this.gameElement.rb.velocity = new Vector3(this.gameElement.rb.velocity.x, power, this.gameElement.rb.velocity.z);
+            //this.jet.GetComponent<ParticleSystem>().Play();
+        }
+        else
+        {
+            //this.jet.GetComponent<ParticleSystem>().Pause();
         }
     }
     #endregion
